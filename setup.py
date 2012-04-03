@@ -1,8 +1,6 @@
 #/usr/bin/env python
-
-import sys
 import os
-import shutil
+from distutils.core import setup
 
 CLASSIFIERS = """
 Development Status :: 1 - Planning
@@ -26,4 +24,13 @@ URL = "https://github.com/JakeMick/pycoevolve"
 LICENSE = "BSD"
 VERSION = "planning-git"
 
+setup(name=PKGNAME,
+      version=VERSION,
+      description=DESCR,
+      author=AUTHOR,
+      author_email=EMAIL,
+      url=URL,
+      packages=["pycoevolve", "pycoevolve.io",
+          "pycoevolve.toy_data","pycoevolve.utils"]
+     )
 
