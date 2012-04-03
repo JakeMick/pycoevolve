@@ -1,7 +1,9 @@
 #/usr/bin/env python
 import os
-from pycoevolve.seqs import load_fasta_align
+from pycoevolve.seqs.fasta import load_fasta_align
 
+def _seq_join(fasta):
+    return os.path.join("toy_fastas",fasta)
 
 #The following three letter abbreviations
 #           are prepended to toy data IDs:
@@ -9,14 +11,25 @@ from pycoevolve.seqs import load_fasta_align
 #   -'filetype = 'abbreviations'
 ###########################################################
 #   - fasta = seq
-fast_join = lambda fasta : os.path.join("toy_fastas",fasta)
+#   - pdb   = pdb
+
 data_names = {
-            "cyc_seq" : fast_join("cycled.fa"),
-            "pmm_seq" : fast_join("pmm_out.fa"),
-            "two_seq" : fast_join("two_seqs.fa")
+            "cyc_seq" : _seq_join("cycled.fa"),
+            "pmm_seq" : _seq_join("pmm_out.fa"),
+            "two_seq" : _seq_join("two_seqs.fa")
             }
 
 def load_toy_data(subset="two_seq"):
+    """ Valid subsets are:
+        cyc_seq : A 21x210 fasta of all of the standard
+                    aminoalphabet and a gap.
+
+        two_seq : The first two sequences from cyc_seq.
+
+        pmm_seq : A MUSCLE alignment of phosphomannomutase
+                    retrieved from the PIR on Apr 3, 2012.
+    """
+
     file_handle = data_names[subset]
 
     if subset[-3:] == 'seq':

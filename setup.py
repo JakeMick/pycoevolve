@@ -1,14 +1,12 @@
 #/usr/bin/env python
-import os
 from distutils.core import setup
 
 CLASSIFIERS = """
 Development Status :: 1 - Planning
 Intended Audience :: Science/Research
-License :: OSI Approved :: BSD License
+License :: OSI Approved :: Simplified BSD
 Programming Language :: C
 Programming Language :: Python :: 2
-Programming Language :: Python :: 3
 Topic :: Scientific/Engineering :: Bio-Informatics
 Operating System :: Microsoft :: Windows
 Operating System :: POSIX
@@ -21,16 +19,22 @@ DESCR = "A simple python module for coevolutionary metrics."
 AUTHOR = "Jacob Mick"
 EMAIL = "jam7w2@mail.missouri.edu"
 URL = "https://github.com/JakeMick/pycoevolve"
-LICENSE = "BSD"
+LICENSE = "Simplified BSD"
 VERSION = "planning-git"
 
-setup(name = PKGNAME,
-      version = VERSION,
-      description = DESCR,
-      author = AUTHOR,
-      author_email = EMAIL,
-      url = URL,
-      packages=["pycoevolve", "pycoevolve.seqs",
-        "pycoevolve.toy_data","pycoevolve.utils",
-        "pycoevolve.toy_data.toy_fastas"])
+setup(  name = PKGNAME,
+        version = VERSION,
+        description = DESCR,
+        author = AUTHOR,
+        author_email = EMAIL,
+        url = URL,
+        classifiers = [cl for cl in CLASSIFIERS.split("\n")
+            if cl is not ""],
+        packages=["pycoevolve",
+            "pycoevolve.seqs",
+            "pycoevolve.toy_data",
+            "pycoevolve.utils"],
+        package_dat = {"pycoevolve" :
+            ["toy_data/toy_fastas/*fa"]}
+        )
 
