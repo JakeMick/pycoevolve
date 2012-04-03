@@ -1,9 +1,11 @@
 #/usr/bin/env python
-import os
+from os.path import dirname, join
+
 from pycoevolve.seqs.fasta import load_fasta_align
 
 def _seq_join(fasta):
-    return os.path.join("toy_fastas",fasta)
+    toy_path = join(dirname(__file__),"toy_fastas")
+    return join(toy_path,fasta)
 
 #The following three letter abbreviations
 #           are prepended to toy data IDs:
