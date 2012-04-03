@@ -30,7 +30,7 @@ setup(name = PKGNAME,
       author = AUTHOR,
       author_email = EMAIL,
       url = URL,
-      packages=["pycoevolve", "pycoevolve.io",
+      packages=["pycoevolve", "pycoevolve.seqs",
         "pycoevolve.toy_data","pycoevolve.utils",
         "pycoevolve.toy_data.toy_fastas"])
 

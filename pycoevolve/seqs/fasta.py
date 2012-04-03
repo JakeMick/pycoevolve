@@ -1,10 +1,6 @@
 #/usr/bin/env python
 
-def load(file_location,trunc_prot_name=True,trunc_len=6):
-    """
-    >>>from pycoevolve import toy_data
-    >>>load(two_seqs.fa)
-    """
+def load_fasta_align(file_location,trunc_prot_name=True,trunc_len=6):
 
     file_handle = open(file_location,"r")
 

@@ -1,6 +1,6 @@
 #/usr/bin/env python
 import os
-from pycoevolve.io import load_fasta_align
+from pycoevolve.seqs import load_fasta_align
 
 
 #The following three letter abbreviations
