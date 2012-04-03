@@ -32,7 +32,9 @@ setup(  name = PKGNAME,
             if cl is not ""],
         packages=["pycoevolve",
             "pycoevolve.seqs",
+            "pycoevolve.seqs.tests",
             "pycoevolve.toy_data",
+            "pycoevolve.toy_data.tests",
             "pycoevolve.utils"],
         package_data = {"pycoevolve" :
             ["toy_data/toy_fastas/*fa"]}
