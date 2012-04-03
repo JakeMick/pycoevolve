@@ -34,7 +34,7 @@ setup(  name = PKGNAME,
             "pycoevolve.seqs",
             "pycoevolve.toy_data",
             "pycoevolve.utils"],
-        package_dat = {"pycoevolve" :
+        package_data = {"pycoevolve" :
             ["toy_data/toy_fastas/*fa"]}
         )
 
