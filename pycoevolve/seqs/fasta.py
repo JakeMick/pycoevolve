@@ -14,9 +14,12 @@ def load_fasta_align(file_location,trunc_prot_name=True,trunc_len=6):
                 prot_name = row[1:trunc_len+1]
             else:
                 prot_name = row[1:]
-            align[prot_name] = ""
+            align[prot_name] = []
         else:
-            align[prot_name] += row
+            align[prot_name].append(row)
+
+    for prot in align:
+        align[prot] = "".join([row for row in align[prot]])
 
     return align
 
