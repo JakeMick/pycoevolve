@@ -1,0 +1,7 @@
+PyCoevolve:
+
+    - Is a simple library for calculating coevolutionary metrics from multiple
+    sequence alignments.
+
+    - Depends on:
+        Python2.7
