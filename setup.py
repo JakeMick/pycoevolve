@@ -24,13 +24,13 @@ URL = "https://github.com/JakeMick/pycoevolve"
 LICENSE = "BSD"
 VERSION = "planning-git"
 
-setup(name=PKGNAME,
-      version=VERSION,
-      description=DESCR,
-      author=AUTHOR,
-      author_email=EMAIL,
-      url=URL,
+setup(name = PKGNAME,
+      version = VERSION,
+      description = DESCR,
+      author = AUTHOR,
+      author_email = EMAIL,
+      url = URL,
       packages=["pycoevolve", "pycoevolve.io",
-          "pycoevolve.toy_data","pycoevolve.utils"]
-     )
+        "pycoevolve.toy_data","pycoevolve.utils",
+        "pycoevolve.toy_data.toy_fastas"])
 
