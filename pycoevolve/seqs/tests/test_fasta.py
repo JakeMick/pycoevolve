@@ -32,4 +32,5 @@ def test_load_fasta_align():
         assert cyc_aln[str(i)] == aminobet
         aminobet = ring_pop(aminobet)
 
-
+if __name__ == "__main__":
+    test_load_fasta_align()

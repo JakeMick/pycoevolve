@@ -1,1 +1,1 @@
-import fasta
+import fasta, tests
