@@ -18,6 +18,17 @@ def transpose_alignment(alignment):
     return transpose_align
 
 def nmi(alignment,alphabet=aminobet,epsilon=1e-9,gap_cut=.1,cnsrv_cut=.95):
+    """
+    Returns the joint entropy normalized mutual information matrix.
+    Alphabet refers to the aminoacids to consider.
+    Epsilon is there so the 0*log(0) is approximately 0.
+    gap_cut refers to the frequency of gaps tolerated at scorable positions.
+        gap_cut = 0 means that only positions with no gaps will be scored.
+    consrv_cut refers the maximum frequency of a single aminoacid at scorable
+        positions. cnsrv_cut = .95 means that if a column has any single aminoacid
+        more than 95% of the time, the position will be ignored
+        This is because calculation of NMI becomes unreliable at low entropy.
+    """
     alpha_size = len(alphabet)
 
     trans_align = transpose_alignment(alignment)
