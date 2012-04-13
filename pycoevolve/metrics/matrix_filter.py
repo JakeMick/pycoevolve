@@ -5,8 +5,8 @@ def bivar_gauss(coev_matrix,epsilon=1e-8):
     """
     This filter takes a symmetric matrix and returns
     the z-scored output, assuming that the probability
-    density function of the column and row follows a
-    Gaussian distribution.
+    density function of the column and row contributing
+    to a element i,j follows a Gaussian distribution.
     """
     resi_num = coev_matrix.shape[0]
     resi_mean = np.tile(coev_matrix.mean(axis=0),[resi_num,1])
