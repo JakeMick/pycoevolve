@@ -1,5 +1,5 @@
 #/usr/bin/env python
-from itertools import combinations_with_replacement as car
+from itertools import combinations as comb
 from collections import Counter
 import numpy as np
 
@@ -17,7 +17,7 @@ def transpose_alignment(alignment):
             for seq in just_seqs]))
     return transpose_align
 
-def nmi(alignment,alphabet=aminobet,epsilon=1e-8,gap_cut=.1,cnsrv_cut=.95):
+def nmi(alignment,alphabet=aminobet,epsilon=1e-9,gap_cut=.1,cnsrv_cut=.95):
     alpha_size = len(alphabet)
 
     trans_align = transpose_alignment(alignment)
@@ -31,18 +31,18 @@ def nmi(alignment,alphabet=aminobet,epsilon=1e-8,gap_cut=.1,cnsrv_cut=.95):
 
     mi_matrix = np.zeros((position_size,position_size),dtype=float)
 
-    for two_pos in car(range(position_size),2):
+    for two_pos in comb(range(position_size),2):
         pos1 = two_pos[0]
         pos2 = two_pos[1]
         col1 = trans_align[pos1]
         col2 = trans_align[pos2]
-        if (col1.count("-")/seq_size > gap_cut) \
-                or (col2.count("-")/seq_size > gap_cut):
+        if ((col1.count("-")/seq_size) > gap_cut) \
+                or ((col2.count("-")/seq_size) > gap_cut):
             pass
         else:
             pmf = np.zeros((alpha_size,alpha_size),dtype=int)
-            two_letter_counts = Counter([i[0] + i[1] for i in
-                    zip(col1,col2)])
+            two_letter_counts = Counter([i[0] + i[1] for i \
+                in zip(col1,col2)])
             for two_letter in combo_alpha:
                 i,j = combo_alpha[two_letter]
                 pmf[i,j] = two_letter_counts[two_letter]
@@ -51,10 +51,13 @@ def nmi(alignment,alphabet=aminobet,epsilon=1e-8,gap_cut=.1,cnsrv_cut=.95):
             npmf += epsilon
             row_sum = npmf.sum(axis=1)
             col_sum = npmf.sum(axis=0)
-            if np.any(row_sum > cnsrv_cut) or np.any(col_sum > cnsrv_cut):
+            if np.any(row_sum > cnsrv_cut) \
+                    or np.any(col_sum > cnsrv_cut):
                 pass
             else:
-                sum_ent = -(row_sum*np.log(row_sum)).sum() - (col_sum*np.log(col_sum)).sum()
+                sum_ent = -(row_sum*np.log(row_sum)).sum() \
+                        - (col_sum*np.log(col_sum)).sum()
                 joint_ent = -(npmf*np.log(npmf)).sum()
-                mi_matrix[pos1,pos2] = (sum_ent - joint_ent)/sum_ent
-    return mi_matrix
+                mi_matrix[pos1,pos2] = 2*(sum_ent \
+                        - joint_ent)/joint_ent
+    return mi_matrix + mi_matrix.T
