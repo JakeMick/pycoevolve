@@ -14,19 +14,10 @@ def seqTruncer(str,pos):
     return ''.join([t for t in truncChars])
 
 
-def truncBySeqId(aln):
+def truncBySeqId(aln,seqId):
     """ Truncates a loaded alignment by the string for a
     regular expression. Fails for multiple matches."""
-    matches = [k for k in aln.keys() if k.find("-") != -1]
-    if len(matches) == 0:
-        raise ValueError('No matches to regStr')
-    if len(matches) > 1:
-        n_mat = []
-        for mat in matches:
-            n_mat.append(''.join([i for i in mat if i != '-']))
-        match = [n_mat.index(max(n_mat))]
-    match = matches[0]
-    truncTarget = aln[match]
+    truncTarget = aln[seqId]
     positions = nongapIndexer(truncTarget)
     truncAlign = {}
     for seq in aln:
