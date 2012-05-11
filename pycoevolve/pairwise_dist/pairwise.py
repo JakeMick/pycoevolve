@@ -11,14 +11,16 @@ def calcSimilarity(aln,threshold):
     similarity = np.zeros([len(aln),len(aln)],dtype=int)
     perm_order = aln.keys()
     for ind,i in enumerate(perm_order):
-        for jnd,j in enumerate(perm_order[i:]):
+        for jnd,j in enumerate(perm_order[ind:]):
+            iseq = aln[i]
+            jseq = aln[j]
             sim = 0
-            for a,b, in zip(i,j):
+            for a,b, in zip(iseq,jseq):
                 if a==b and a!='-':
                     sim += 1
-            l = len(i)
-            assert l == len(j)
-            if sim/len(i) >= threshold:
+            l = len(iseq)
+            assert l == len(jseq)
+            if sim/len(iseq) >= threshold:
                 similarity[jnd,ind] = 1
                 similarity[ind,jnd] = 1
     return similarity,perm_order
@@ -30,11 +32,11 @@ def removeHigh(aln,threshold):
     similarity,perm_order = calcSimilarity(aln,threshold)
     keep = Set(range(len(perm_order)))
     while np.any(similarity == 1):
-        remove = np.where(similarity.sum(axis=1).max())[0][0]
+        remove = np.where(similarity.sum(axis=1))[0][0]
         similarity[remove,:] = 0
         similarity[:,remove] = 0
         keep.discard(remove)
-    keep_seqs = [perm_order(k) for k in keep]
+    keep_seqs = [perm_order[k] for k in keep]
     n_aln = {}
     for i in keep_seqs:
         n_aln[i] = aln[i]

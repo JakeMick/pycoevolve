@@ -1,5 +1,4 @@
 #/usr/bin/env python
-import re
 
 def nongapIndexer(str):
     pos = []
@@ -15,15 +14,17 @@ def seqTruncer(str,pos):
     return ''.join([t for t in truncChars])
 
 
-def truncBySeqId(aln, regStr):
+def truncBySeqId(aln):
     """ Truncates a loaded alignment by the string for a
     regular expression. Fails for multiple matches."""
-    reg = re.compile(regStr)
-    matches = [k for k in aln.keys() if reg.match(k)]
+    matches = [k for k in aln.keys() if k.find("-") != -1]
     if len(matches) == 0:
         raise ValueError('No matches to regStr')
     if len(matches) > 1:
-        raise ValueError('More than one match to regStr')
+        n_mat = []
+        for mat in matches:
+            n_mat.append(''.join([i for i in mat if i != '-']))
+        match = [n_mat.index(max(n_mat))]
     match = matches[0]
     truncTarget = aln[match]
     positions = nongapIndexer(truncTarget)

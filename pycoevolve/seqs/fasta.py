@@ -1,6 +1,6 @@
 #/usr/bin/env python
 
-def load_fasta_align(file_location,trunc_prot_name=True,
+def load_fasta_align(file_location,trunc_prot_name=False,
                                             trunc_len=6):
     """
     Creates a dict of the alignment where the keys are

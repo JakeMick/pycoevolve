@@ -36,7 +36,8 @@ setup(  name = PKGNAME,
             "pycoevolve.toy_data",
             "pycoevolve.toy_data.tests",
             "pycoevolve.utils",
-            "pycoevolve.metrics"],
+            "pycoevolve.metrics",
+            "pycoevolve.pairwise_dist"],
         package_data = {"pycoevolve" :
             ["toy_data/toy_fastas/*fa"]}
         )
