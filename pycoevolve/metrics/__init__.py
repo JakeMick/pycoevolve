@@ -1,1 +1,2 @@
-import mi, matrix_filter
+from mi import *
+from matrix_filter import *

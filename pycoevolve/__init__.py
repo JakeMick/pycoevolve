@@ -1,1 +1,5 @@
-import seqs, toy_data, utils, metrics, pairwise_dist
+from seqs import *
+from toy_data import *
+from utils import *
+from metrics import * 
+from pairwise_dist import *
