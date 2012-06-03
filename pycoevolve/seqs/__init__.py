@@ -1,1 +1,2 @@
-import fasta, tests
+from fasta import *
+from tests import *

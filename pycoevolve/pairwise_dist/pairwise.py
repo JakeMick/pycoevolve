@@ -25,6 +25,32 @@ def calcSimilarity(aln,threshold):
                 similarity[ind,jnd] = 1
     return similarity,perm_order
 
+def calcContinuousSimilarity(aln):
+    """
+    Create a ndarray representing the
+    Levehdistance between sequences.
+    Returns the ndarray, the order used.
+    """
+    similarity = np.zeros([len(aln),len(aln)],dtype=float)
+    perm_order = aln.keys()
+    for ind,i in enumerate(perm_order):
+        for jnd,j in enumerate(perm_order):
+            iseq = aln[i]
+            jseq = aln[j]
+            sim = 0
+            sublen = 0
+            for a,b, in zip(iseq,jseq):
+                if a==b:
+                    if a!='-':
+                        sim += 1
+                    else:
+                        sublen += 1
+            l = float(len(iseq))
+            usedLen = float(l - sublen)
+            similarity[ind,jnd] = sim/usedLen
+    return similarity,perm_order
+
+
 def removeHigh(aln,threshold):
     """Removes sequences in the alignment greater than
     the threshold of percent sequence similarity for

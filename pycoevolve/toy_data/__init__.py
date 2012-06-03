@@ -1,1 +1,1 @@
-from load_toy import load_toy_data
+from load_toy import *

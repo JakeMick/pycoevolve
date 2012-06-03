@@ -1,1 +1,1 @@
-import pairwise
+from pairwise import *
